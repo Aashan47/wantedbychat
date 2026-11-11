@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Connect TikTok</title><link rel="icon" href="../icon.png"><style>:root{--bg:#0e0e12;--fg:#f2f2f5;--muted:#a6a6b3;--accent:#ffe100;--card:#17171d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:48px 20px 80px}h1{font-size:2rem;line-height:1.2;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 28px}a{color:var(--accent)}h2{font-size:1.1rem;margin:28px 0 6px}
+p,li{color:#dcdce3}ul{padding-left:20px}.links{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+.links a{background:var(--card);border:1px solid #2a2a33;padding:10px 14px;border-radius:10px;text-decoration:none;color:var(--fg)}
+.logo{width:88px;height:88px;border-radius:50%;display:block;margin-bottom:18px}footer{margin-top:48px;color:var(--muted);font-size:.9rem}</style>
+<style>.code{background:#17171d;border:1px solid #2a2a33;border-radius:10px;padding:14px;word-break:break-all;font-family:ui-monospace,Menlo,monospace;margin:14px 0}
+button{background:var(--accent);color:#000;border:0;border-radius:10px;padding:12px 18px;font-weight:700;font-size:1rem;cursor:pointer}
+.ok{color:#5be37a}.err{color:#ff6b6b}</style></head><body><main>
+<img class="logo" src="../icon.png" alt="Wanted By Chat logo"><h1>Wanted By Chat Publisher</h1>
+<div id="out"><p class="sub">Waiting for TikTok...</p></div>
+<footer><a href="../">Wanted By Chat</a> · <a href="../terms/">Terms</a> · <a href="../privacy/">Privacy</a> · wantedbychat@gmail.com</footer>
+</main><script>
+const q = new URLSearchParams(location.search), out = document.getElementById('out');
+const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+if (q.get('code')) {
+  const msg = '!tiktok ' + q.get('code');
+  out.innerHTML = '<h2 class="ok">TikTok account connected ✓</h2><p>Last step: send this to the Wanted By Chat control panel ' +
+    '(the #review channel) so the publisher can finish linking your TikTok account. The code works once and expires in a few minutes.</p>' +
+    '<div class="code" id="c">' + esc(msg) + '</div><button id="b">Copy</button>';
+  document.getElementById('b').onclick = () => navigator.clipboard.writeText(msg).then(() => b.textContent = 'Copied ✓');
+} else if (q.get('error')) {
+  out.innerHTML = '<h2 class="err">TikTok connection cancelled</h2><p>' + esc(q.get('error_description') || q.get('error')) + '</p>';
+} else {
+  out.innerHTML = '<p>This page completes the TikTok connection for the Wanted By Chat publishing tool. Start from the control panel.</p>';
+}
+</script></body></html>
